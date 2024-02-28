@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "lLYTn5wAO4uBhcTNS6zw4B5uX/TzD9ywpTlugX6Lal+JnUY24KcdxmgxWz/91iP5BQ0zIbsJji5n5BhqQRzUMQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ebatista\\Documents\\La biblia\\Udemy\\Asp_dotnet_core RESTFUL_API\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ebatista\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.14\\microsoft.aspnetcore.openapi.7.0.14.nupkg.sha512",
+    "C:\\Users\\ebatista\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\ebatista\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\ebatista\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\ebatista\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\ebatista\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\ebatista\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
