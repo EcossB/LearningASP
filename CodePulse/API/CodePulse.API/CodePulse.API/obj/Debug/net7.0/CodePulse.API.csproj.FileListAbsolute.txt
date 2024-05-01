@@ -1,0 +1,7 @@
+C:\Users\erwin\Source\Repos\LearningASP\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net7.0\CodePulse.API.csproj.AssemblyReference.cache
+C:\Users\erwin\Source\Repos\LearningASP\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net7.0\CodePulse.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\erwin\Source\Repos\LearningASP\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net7.0\CodePulse.API.AssemblyInfoInputs.cache
+C:\Users\erwin\Source\Repos\LearningASP\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net7.0\CodePulse.API.AssemblyInfo.cs
+C:\Users\erwin\Source\Repos\LearningASP\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net7.0\CodePulse.API.csproj.CoreCompileInputs.cache
+C:\Users\erwin\Source\Repos\LearningASP\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net7.0\CodePulse.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\erwin\Source\Repos\LearningASP\CodePulse\API\CodePulse.API\CodePulse.API\obj\Debug\net7.0\CodePulse.API.MvcApplicationPartsAssemblyInfo.cache
