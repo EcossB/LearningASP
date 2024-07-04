@@ -1,3 +1,8 @@
+using CodePulse.API.Data;
+using CodePulse.API.Repository.Implementation;
+using CodePulse.API.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// injecting DbContext. 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CodePulseConnectionString"));
+});
+
+builder.Services.AddScoped<ICategoryRepository, CategoyRepository>();
 
 var app = builder.Build();
 
