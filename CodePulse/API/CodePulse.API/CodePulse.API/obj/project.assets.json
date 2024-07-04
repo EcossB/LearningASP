@@ -3425,19 +3425,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\erwin\\.nuget\\packages\\": {}
+    "C:\\Users\\ebatista\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\erwin\\Source\\Repos\\LearningASP\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
+      "projectUniqueName": "C:\\Users\\ebatista\\Source\\Repos\\EcossB\\LearningASP\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
       "projectName": "CodePulse.API",
-      "projectPath": "C:\\Users\\erwin\\Source\\Repos\\LearningASP\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
-      "packagesPath": "C:\\Users\\erwin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\erwin\\Source\\Repos\\LearningASP\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\obj\\",
+      "projectPath": "C:\\Users\\ebatista\\Source\\Repos\\EcossB\\LearningASP\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\CodePulse.API.csproj",
+      "packagesPath": "C:\\Users\\ebatista\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ebatista\\Source\\Repos\\EcossB\\LearningASP\\CodePulse\\API\\CodePulse.API\\CodePulse.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\erwin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ebatista\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3501,7 +3501,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
