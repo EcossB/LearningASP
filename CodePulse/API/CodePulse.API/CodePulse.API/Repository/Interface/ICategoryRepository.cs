@@ -6,5 +6,7 @@ namespace CodePulse.API.Repository.Interface
     {
         /*This interface its going to be implemented on the categoryRepository class.*/
         Task<Category> CreateAsync(Category category);
+
+        Task<IEnumerable<Category>> GetAllAsync();
     }
 }
