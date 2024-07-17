@@ -17,7 +17,7 @@ namespace CodePulse.API.Repository.Implementation
 
         public CategoyRepository(ApplicationDbContext dbContext)
         {
-            this.dbContext = dbContext;     
+            this.dbContext = dbContext;
         }
         public async Task<Category> CreateAsync(Category category)
         {
@@ -29,6 +29,32 @@ namespace CodePulse.API.Repository.Implementation
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await dbContext.Categories.ToListAsync();
+        }
+
+        public async Task<Category?> GetByIdAsync(Guid id)
+        {
+            return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<Category> UpdateAsync(Category category)
+        {
+            Category newCategory = await dbContext.Categories.Where(c => c.Id == category.Id).FirstAsync();
+
+            newCategory.Id = category.Id;
+            newCategory.Name = category.Name;
+            newCategory.UrlHandle = category.UrlHandle;
+
+            await dbContext.SaveChangesAsync();
+
+            return newCategory;
+
+        }
+
+        public async Task DeleteAsync(Category category)
+        {
+             await dbContext.Categories.Where(c => c.Id == category.Id).ExecuteDeleteAsync();
+
+             await dbContext.SaveChangesAsync();
         }
     }
 }
