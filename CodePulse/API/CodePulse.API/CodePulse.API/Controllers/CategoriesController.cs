@@ -30,7 +30,7 @@ namespace CodePulse.API.Controllers
                 Name = request.Name,
                 UrlHandle = request.UrlHandle
             };
-            
+
             await _categoryRepository.CreateAsync(category);
 
             //mapping domain model to Dto response
@@ -64,5 +64,68 @@ namespace CodePulse.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetByIdAsync([FromRoute]Guid id)
+        {
+            var categorie = await _categoryRepository.GetByIdAsync(id);
+
+            if (categorie is null)
+            {
+                return NotFound();
+            } 
+
+            var response = new CategoryResponseDto()
+            {
+                Id = categorie.Id,
+                Name = categorie.Name,
+                UrlHandle = categorie.UrlHandle
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryRequestDto category)
+        {
+            //Mapping dto to domain
+            var updateCategory = new Category()
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+
+            //saving domain
+            await _categoryRepository.UpdateAsync(updateCategory);
+
+
+            //mapping domain to dto
+            var response = new CategoryResponseDto()
+            {
+                Id = updateCategory.Id,
+                Name = updateCategory.Name,
+                UrlHandle = updateCategory.UrlHandle
+            };
+
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCategory(UpdateCategoryRequestDto category)
+        {
+            var deleteCategory = new Category()
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+
+            await _categoryRepository.DeleteAsync(deleteCategory);
+
+            return NoContent();
+        }
+
     }
 }
