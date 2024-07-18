@@ -10,7 +10,7 @@
 
   <div class="mt-3">
     <div class="table-responsive">
-      <table class="table table-bordered" *ngIf="BlogPost$ | async as blogpost">
+      <table class="table table-bordered" *ngIf="BlogPost$ | async as blogposts">
         <thead>
           <tr>
             <th scope="col">Title</th>
@@ -18,7 +18,7 @@
             <th scope="col">Is Visible?</th>
           </tr>
         </thead>
-        <tbody *ngFor="let blog of blogpost">
+        <tbody *ngFor="let blog of blogposts">
           <tr>
             <td>{{blog.title}}</td>
             <td>{{blog.shortDescription}}</td>
