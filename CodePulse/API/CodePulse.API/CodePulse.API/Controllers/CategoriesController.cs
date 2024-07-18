@@ -87,19 +87,24 @@ namespace CodePulse.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCategory(UpdateCategoryRequestDto category)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateCategory([FromRoute] Guid id,UpdateCategoryRequestDto request)
         {
             //Mapping dto to domain
             var updateCategory = new Category()
             {
-                Id = category.Id,
-                Name = category.Name,
-                UrlHandle = category.UrlHandle
+                Id = id,
+                Name = request.Name,
+                UrlHandle = request.UrlHandle
             };
 
             //saving domain
-            await _categoryRepository.UpdateAsync(updateCategory);
+            updateCategory = await _categoryRepository.UpdateAsync(updateCategory);
 
+            if (updateCategory is null)
+            {
+                return NotFound();
+            }
 
             //mapping domain to dto
             var response = new CategoryResponseDto()
@@ -113,16 +118,17 @@ namespace CodePulse.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteCategory(UpdateCategoryRequestDto category)
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
         {
-            var deleteCategory = new Category()
-            {
-                Id = category.Id,
-                Name = category.Name,
-                UrlHandle = category.UrlHandle
-            };
 
-            await _categoryRepository.DeleteAsync(deleteCategory);
+            var deleteCategory = await _categoryRepository.DeleteAsync(id);
+
+
+            if (deleteCategory is null)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
