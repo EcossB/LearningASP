@@ -36,25 +36,39 @@ namespace CodePulse.API.Repository.Implementation
             return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<Category> UpdateAsync(Category category)
+        public async Task<Category?> UpdateAsync(Category category)
         {
-            Category newCategory = await dbContext.Categories.Where(c => c.Id == category.Id).FirstAsync();
+            //Category newCategory = await dbContext.Categories.Where(c => c.Id == category.Id).FirstAsync();
 
-            newCategory.Id = category.Id;
-            newCategory.Name = category.Name;
-            newCategory.UrlHandle = category.UrlHandle;
+            var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == category.Id);
 
-            await dbContext.SaveChangesAsync();
+            if(existingCategory is not null)
+            {
+                /*existingCategory.Id = category.Id;
+                existingCategory.Name = category.Name;
+                existingCategory.UrlHandle = category.UrlHandle; a way to update a instance. */ 
 
-            return newCategory;
+                dbContext.Entry(existingCategory).CurrentValues.SetValues(category);
+                await dbContext.SaveChangesAsync();
+                return existingCategory;
+            }
 
+            return null;
         }
 
-        public async Task DeleteAsync(Category category)
+        public async Task<Category?> DeleteAsync(Guid id)
         {
-             await dbContext.Categories.Where(c => c.Id == category.Id).ExecuteDeleteAsync();
+            var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
-             await dbContext.SaveChangesAsync();
+            if(existingCategory is not null)
+            {
+                dbContext.Categories.Remove(existingCategory);
+                await dbContext.SaveChangesAsync();
+                return existingCategory;
+            } 
+
+            return null;
+            
         }
     }
 }
