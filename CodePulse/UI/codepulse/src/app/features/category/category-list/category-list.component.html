@@ -7,7 +7,7 @@
 
   </div>
 
-  <ng-container *ngIf="categoryList">
+  <ng-container *ngIf="categories$ | async as categories">
 
     <div class="table-responsive mt-3">
       <table
@@ -17,15 +17,18 @@
           <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Url Handle</th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody class="table-group-divider" >
-          <tr  class="table" *ngFor="let category of categoryList ">
+          <tr  class="table" *ngFor="let category of categories ">
             <td scope="row">{{category.id}}</td>
             <td>{{category.name}}</td>
             <td>{{category.urlHandle}}</td>
+            <td>
+              <a class="btn btn-light" [routerLink]="['/admin/categories', category.id]"> Edit</a>
+            </td>
           </tr>
         </tbody>
       </table>

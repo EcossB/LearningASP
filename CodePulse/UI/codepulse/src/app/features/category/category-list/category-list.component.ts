@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '../models/category.model';
 import { CategoryService } from '../services/category.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-list',
@@ -11,7 +11,14 @@ import { Subscription } from 'rxjs';
 })
 export class CategoryListComponent implements OnInit, OnDestroy{
 
-  categoryList!: Category[];
+  // categoryList!: Category[];
+
+  /**
+   * using an async pipe. Async pipe is a feature that subscribe automatically to an observable.
+   */
+
+  categories$?: Observable<Category[]>;
+
   private addCategorySubscription?: Subscription;
 
   constructor(private categoryService: CategoryService){
@@ -19,17 +26,7 @@ export class CategoryListComponent implements OnInit, OnDestroy{
   }
 
   loadCategories() {
-    this.addCategorySubscription = this.categoryService.getAllCategories().subscribe({
-      next: (response) => {
-        this.categoryList = response;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-      complete: () => {
-        console.log(this.categoryList);
-      }
-    });
+    this.categories$ = this.categoryService.getAllCategories();
   }
 
   ngOnInit(): void {
