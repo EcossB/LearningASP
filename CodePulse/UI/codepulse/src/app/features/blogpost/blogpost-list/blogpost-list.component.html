@@ -8,25 +8,29 @@
     <a [routerLink]="['/admin/blogpost/add']" class="btn btn-primary">Add BlogPost</a>
   </div>
 
-  <div class="mt-3">
-    <div class="table-responsive">
-      <table class="table table-bordered" *ngIf="BlogPost$ | async as blogposts">
-        <thead>
-          <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Short Description</th>
-            <th scope="col">Is Visible?</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let blog of blogposts">
-          <tr>
-            <td>{{blog.title}}</td>
-            <td>{{blog.shortDescription}}</td>
-            <td>{{blog.isVisible}}</td>
-          </tr>
-        </tbody>
-      </table>
+  <ng-container *ngIf="BlogPost$ | async as blogposts">
+    <div class="mt-3">
+      <div class="table-responsive">
+        <table class="table table-bordered" >
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Short Description</th>
+              <th scope="col">Is Visible?</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let blog of blogposts">
+            <tr>
+              <td>{{blog.title}}</td>
+              <td>{{blog.shortDescription}}</td>
+              <td>{{blog.isVisible}}</td>
+              <td><button class="btn btn-light">Edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  </ng-container>
 
 </div>
