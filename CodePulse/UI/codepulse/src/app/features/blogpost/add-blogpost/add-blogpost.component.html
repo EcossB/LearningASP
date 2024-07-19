@@ -34,7 +34,17 @@
 
     <div class="mt-3">
       <label for="addBlogpostContent" class="form-label">Content</label>
-      <textarea name="blogPostContent" id="blogPostContent" class="form-control w-50" rows="15" [(ngModel)]="blogpostRequest.content"></textarea>
+
+      <div class="d-flex flex-row">
+        <div class="col-6 p-2">
+          <textarea name="blogPostContent" id="blogPostContent" class="form-control w-80" rows="15" [(ngModel)]="blogpostRequest.content"></textarea>
+        </div>
+
+      <div class="col-6 p-2" style="overflow-y: scroll; max-height: 350px;">
+        <markdown [data]="blogpostRequest.content"></markdown>
+      </div>
+
+      </div>
     </div>
 
     <div class="mt-3">
@@ -43,6 +53,11 @@
           <button class="btn btn-light ms-2">Select Image</button>
         </label>
       </div>
+
+      <ng-container *ngIf="blogpostRequest.featuredImageUrl  !== ''">
+        <img [src]="blogpostRequest.featuredImageUrl">
+      </ng-container>
+
       <input type="text"
              class="form-control"
              id="blogPostFeatureImage"
