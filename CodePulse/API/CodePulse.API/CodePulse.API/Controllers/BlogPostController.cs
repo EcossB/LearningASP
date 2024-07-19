@@ -1,5 +1,6 @@
 ﻿using CodePulse.API.Models.Domain;
 using CodePulse.API.Models.DTO.BlogPostDtos;
+using CodePulse.API.Models.DTO.CategoryDtos;
 using CodePulse.API.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +12,12 @@ namespace CodePulse.API.Controllers
     {
         
         private readonly IBlogPostRepository blogPostRepository;
+        private readonly ICategoryRepository categoryRepository;
 
-        public BlogPostController(IBlogPostRepository blogPostRepository)
+        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             this.blogPostRepository = blogPostRepository;
+            this.categoryRepository = categoryRepository;
         }
 
 
@@ -31,8 +34,19 @@ namespace CodePulse.API.Controllers
                UrlHandle = request.UrlHandle,
                PublishedDate = request.PublishedDate,
                Author = request.Author,
-               IsVisible = request.IsVisible
+               IsVisible = request.IsVisible,
+               Categories = new List<Category>()
             };
+
+            foreach(var category in request.Category)
+            {
+                var existingCategory = await categoryRepository.GetByIdAsync(category);
+                if (existingCategory is not null)
+                {
+                    newBlog.Categories.Add(existingCategory);
+                }
+
+            }
 
 
             var blogPost = await blogPostRepository.CreateAsync(newBlog);
@@ -46,7 +60,13 @@ namespace CodePulse.API.Controllers
                 UrlHandle = blogPost.UrlHandle,
                 PublishedDate = blogPost.PublishedDate,
                 Author = blogPost.Author,
-                IsVisible = blogPost.IsVisible 
+                IsVisible = blogPost.IsVisible,
+                Category = blogPost.Categories.Select(x => new CategoryResponseDto()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+                }).ToList()
             };
 
             return Ok(response);
@@ -57,7 +77,6 @@ namespace CodePulse.API.Controllers
         public async Task<IActionResult> GetAllBlogs()
         {
             var listBlogs = await blogPostRepository.GetAllAsync();
-
             var response = new List<AddBlogPostResponseDto>();
 
             foreach(var blog in listBlogs)
@@ -72,7 +91,13 @@ namespace CodePulse.API.Controllers
                     PublishedDate = blog.PublishedDate,
                     IsVisible = blog.IsVisible,
                     UrlHandle = blog.UrlHandle,
-                    Title = blog.Title
+                    Title = blog.Title,
+                    Category = blog.Categories.Select(x => new CategoryResponseDto() 
+                    { 
+                        Id = x.Id,
+                        Name = x.Name,
+                        UrlHandle = x.UrlHandle
+                    }).ToList()
                 });
 
             }
