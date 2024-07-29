@@ -7,5 +7,11 @@ namespace CodePulse.API.Repository.Interface
         public Task<BlogPost> CreateAsync(BlogPost blogPost);
 
         public Task<IEnumerable<BlogPost>> GetAllAsync();
+
+        public Task<BlogPost> GetById(Guid id);
+
+        public Task<BlogPost> UpdateBlogPost(BlogPost blogPost);
+
+        public Task<BlogPost?> DeleteAsync(Guid id);
     }
 }

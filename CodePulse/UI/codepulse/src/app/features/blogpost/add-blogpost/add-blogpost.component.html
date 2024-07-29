@@ -96,7 +96,14 @@
 
     <div class="mt-3">
       <label for="addBlogpost" class="form-label">Categories</label>
-      <textarea name="blogPostCategories" id="blogPostCategories" class="form-control w-50"></textarea>
+
+      <ng-container *ngIf="Categories$ | async as categories">
+        <select name="categorySelect" [(ngModel)]="blogpostRequest.category" id="categorySelect" class="form-control" multiple>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </option>
+        </select>
+      </ng-container>
     </div>
 
     <div class="mt-3 d-flex">

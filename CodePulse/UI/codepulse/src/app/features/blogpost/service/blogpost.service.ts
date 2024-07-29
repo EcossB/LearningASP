@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment.development';
 import { AddBlogPostRequest } from '../model/add-blogpost-request.model';
 import { Observable } from 'rxjs';
 import { BlogPost } from '../model/blogpost.model';
+import { EditBlogPostRequest } from '../model/edit-blogpost-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,14 @@ export class BlogPostService {
 
   getAllPost(): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(this.urlApi);
+  }
+
+  getPostById(id: string): Observable<BlogPost>{
+    return this.http.get<BlogPost>(`${this.urlApi}/${id}`)
+  }
+
+  updatePost(id: string, updateCategory: EditBlogPostRequest): Observable<BlogPost>{
+    return this.http.put<BlogPost>(`${this.urlApi}/${id}`, updateCategory);
   }
 
 

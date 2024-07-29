@@ -17,6 +17,7 @@
               <th scope="col">Title</th>
               <th scope="col">Short Description</th>
               <th scope="col">Is Visible?</th>
+              <th scope="col">Categories</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -25,7 +26,14 @@
               <td>{{blog.title}}</td>
               <td>{{blog.shortDescription}}</td>
               <td>{{blog.isVisible}}</td>
-              <td><button class="btn btn-light">Edit</button></td>
+              <td>
+                <span *ngFor="let category of blog.category">
+                  <span class="badge bg-secondary">{{category.name}}</span>
+                </span>
+              </td>
+              <td>
+                <a class="btn btn-light" [routerLink]="['/admin/blogpost', blog.id]">Edit</a>
+              </td>
             </tr>
           </tbody>
         </table>
