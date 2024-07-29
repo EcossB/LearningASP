@@ -1,6 +1,7 @@
 ﻿using CodePulse.API.Models.Domain;
 using CodePulse.API.Models.DTO.BlogPostDtos;
 using CodePulse.API.Models.DTO.CategoryDtos;
+using CodePulse.API.Repository.Implementation;
 using CodePulse.API.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -103,6 +104,107 @@ namespace CodePulse.API.Controllers
             }
 
             return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetBlogById([FromRoute] Guid id)
+        {
+            var blogPost = await blogPostRepository.GetById(id);
+
+            if(blogPost is null)
+            {
+                return NoContent();
+            }
+
+            //domain to mdto
+            var response = new BlogPostResponseDto()
+            {
+                Id = blogPost.Id,
+                Author = blogPost.Author,
+                Content = blogPost.Content,
+                ShortDescription = blogPost.ShortDescription,
+                PublishedDate = blogPost.PublishedDate,
+                IsVisible = blogPost.IsVisible,
+                UrlHandle = blogPost.UrlHandle,
+                Title = blogPost.Title,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                Category = blogPost.Categories.Select(x => new CategoryResponseDto()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+                }).ToList()
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateBlog([FromRoute] Guid id, UpdateBlogPostRequestDto editPost)
+        {
+            var request = new BlogPost()
+            {
+                Id = id,
+                Author = editPost.Author,
+                Content = editPost.Content,
+                ShortDescription = editPost.ShortDescription,
+                PublishedDate = editPost.PublishedDate,
+                IsVisible = editPost.IsVisible,
+                UrlHandle = editPost.UrlHandle,
+                Title = editPost.Title,
+                FeaturedImageUrl = editPost.FeaturedImageUrl,
+                Categories = new List<Category>()
+            };
+
+          
+            foreach(var category in editPost.Category)
+            {
+                var categoryFound = await categoryRepository.GetByIdAsync(category);
+                
+                if(categoryFound is not null)
+                {
+                    request.Categories.Add(categoryFound);
+                }
+            }
+
+            var blogpost = await blogPostRepository.UpdateBlogPost(request);
+
+            if (blogpost is null)
+            {
+                return NotFound();
+            }
+
+            var response = new BlogPostResponseDto()
+            {
+                Id = blogpost.Id,
+                Author = blogpost.Author,
+                Content = blogpost.Content,
+                ShortDescription = blogpost.ShortDescription,
+                PublishedDate = blogpost.PublishedDate,
+                IsVisible = blogpost.IsVisible,
+                UrlHandle = blogpost.UrlHandle,
+                Title = blogpost.Title,
+                FeaturedImageUrl = blogpost.FeaturedImageUrl,
+                Category = blogpost.Categories.Select(x => new CategoryResponseDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList()
+            };
+
+
+            return Ok(response);
+        }
+
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteBlog([FromRoute] Guid id)
+        {
+
         }
 
     }
