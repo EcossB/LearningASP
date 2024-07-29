@@ -204,6 +204,14 @@ namespace CodePulse.API.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteBlog([FromRoute] Guid id)
         {
+            var existingBlogPost = await blogPostRepository.DeleteAsync(id);
+
+            if (existingBlogPost is null)
+            {
+                return NotFound();
+            }
+
+            return Ok();
 
         }
 
