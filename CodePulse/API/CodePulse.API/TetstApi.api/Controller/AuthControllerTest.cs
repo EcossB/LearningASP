@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace TetstApi.api.Controller;
 using CodePulse.API.Controllers;
 using CodePulse.API.Models.DTO.AuthDto;
@@ -126,7 +128,7 @@ public class AuthControllerTest
         var result = await _authController.Login(loginDto);
 
         // Assert
-        var validationProblem = Assert.IsType<ObjectResult>(result);
+        var validationProblem = Assert.IsType<BadRequestResult>(result);
         Assert.Equal(400, validationProblem.StatusCode);
     }
 

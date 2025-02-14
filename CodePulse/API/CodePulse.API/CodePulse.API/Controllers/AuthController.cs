@@ -103,8 +103,9 @@ public class AuthController : Controller
             }
         }
         
-        ModelState.AddModelError("", "Invalid username or password.");
-        return ValidationProblem(ModelState);
+        //ModelState.AddModelError("400", "Invalid username or password.");
+        //return ValidationProblem(ModelState);
+        return BadRequest();
     }
     
 }
