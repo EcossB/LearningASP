@@ -24,7 +24,7 @@ namespace CodePulse.API.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateBlog(AddBlogPostRequest request)
         {
             //mapping dto to model
