@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category.model';
 import { UpdateCategoryRequest } from '../models/update-category-request.model';
+import { ImageService } from '../../../shared/components/image-selector/image.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -21,7 +22,8 @@ export class EditCategoryComponent implements OnInit, OnDestroy{
 
   constructor(private route: ActivatedRoute,
               private categoryService: CategoryService,
-              private router: Router
+              private router: Router,
+              private imageService: ImageService
   ){}
 
 
@@ -44,7 +46,11 @@ export class EditCategoryComponent implements OnInit, OnDestroy{
             }
           })
         }
+
+        
+
       }
+
     })
   }
 
