@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 import { environment } from '../../../../environments/environment.development';
 import { UpdateCategoryRequest } from '../models/update-category-request.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,15 @@ export class CategoryService {
 
 
 
-  constructor(private http: HttpClient) {
-
-   }
+  constructor(private http: HttpClient,
+              private coolies: CookieService
+  ) {}
 
    urlApi: string = `${environment.apiBaseUrl}/api/Categories`;
 
+
    addCategory(model: AddCategoryRequest): Observable<void>{
-     return this.http.post<void>(this.urlApi,model);
+     return this.http.post<void>(`${this.urlApi}?addAuth=true`,model);
    }
 
    getAllCategories(): Observable<Category[]> {
@@ -32,11 +34,11 @@ export class CategoryService {
    }
 
    updateCategory(id:string, updateCategory: UpdateCategoryRequest): Observable<Category>{
-      return this.http.put<Category>(`${this.urlApi}/${id}`, updateCategory);
+      return this.http.put<Category>(`${this.urlApi}/${id}?addAuth=true`, updateCategory);
    }
 
    deleteCategory(id: string ): Observable<void> {
-    return this.http.delete<void>(`${this.urlApi}/${id}`);
+    return this.http.delete<void>(`${this.urlApi}/${id}?addAuth=true`);
    }
 
 }
