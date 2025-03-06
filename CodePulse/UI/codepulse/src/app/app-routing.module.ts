@@ -6,14 +6,21 @@ import { EditCategoryComponent } from './features/category/edit-category/edit-ca
 import { BlogpostListComponent } from './features/blogpost/blogpost-list/blogpost-list.component';
 import { AddBlogpostComponent } from './features/blogpost/add-blogpost/add-blogpost.component';
 import { EditBlogpostComponent } from './features/blogpost/edit-blogpost/edit-blogpost.component';
+import { HomeComponent } from './features/public/home/home.component';
+import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { authGuard } from './features/auth/guards/auth.guard';
 
 const routes: Routes = [
-  {path: 'admin/categories', title: 'Category List', component: CategoryListComponent},
-  {path: 'admin/categories/add', title: 'Add Category', component:AddCategoryComponent},
-  {path: 'admin/categories/:id', title: 'Edit Category', component:EditCategoryComponent},
-  {path: 'admin/blogpost', title: 'BlogPost', component:BlogpostListComponent},
-  {path: 'admin/blogpost/add', title: 'Add BlogPost', component:AddBlogpostComponent},
-  {path: 'admin/blogpost/:id', title: 'Edit BlogPost', component:EditBlogpostComponent}
+  {path: 'admin/categories', title: 'Category List', component: CategoryListComponent, canActivate: [authGuard]},
+  {path: 'admin/categories/add', title: 'Add Category', component:AddCategoryComponent, canActivate: [authGuard]},
+  {path: 'admin/categories/:id', title: 'Edit Category', component:EditCategoryComponent, canActivate: [authGuard]},
+  {path: 'admin/blogpost', title: 'BlogPost', component:BlogpostListComponent, canActivate: [authGuard]},
+  {path: 'admin/blogpost/add', title: 'Add BlogPost', component:AddBlogpostComponent, canActivate: [authGuard]},
+  {path: 'admin/blogpost/:id', title: 'Edit BlogPost', component:EditBlogpostComponent, canActivate: [authGuard]},
+  {path: '', title: 'Home', component:HomeComponent},
+  {path: 'blog/:url', title:'Blog Detail', component:BlogDetailsComponent},
+  {path: 'login', title:'Login', component:LoginComponent}
 ];
 
 @NgModule({
